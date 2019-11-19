@@ -166,8 +166,30 @@ namespace HumaneSociety
         // TODO: Allow any of the CRUD operations to occur here
         internal static void RunEmployeeQueries(Employee employee, string crudOperation)
         {
-            throw new NotImplementedException();
+            //calling all employee methods
         }
+
+        //create CRUD operation methods
+        internal static void AddEmployee(Employee employee)
+        {
+            
+        }
+
+        internal static void GetEmployeeById(int id)
+        {
+            //logic
+        }
+
+        internal static void UpdateEmployee()
+        {
+            //logic
+        }
+
+        internal static void RemoveEmployee()
+        {
+            //logic
+        }
+
 
         // TODO: Animal CRUD Operations
         internal static void AddAnimal(Animal animal)
