@@ -166,7 +166,6 @@ namespace HumaneSociety
         // TODO: Allow any of the CRUD operations to occur here
         internal static void RunEmployeeQueries(Employee employee, string crudOperation)
         {
-
             switch(crudOperation)
             {
                 case "create":
@@ -192,9 +191,6 @@ namespace HumaneSociety
                     db.Employees.DeleteOnSubmit(employee);
                     db.SubmitChanges();
                     return;
-
-
-
             }
         }
 
@@ -203,22 +199,40 @@ namespace HumaneSociety
         // TODO: Animal CRUD Operations
         internal static void AddAnimal(Animal animal)
         {
+            // CREATE
             db.Animals.InsertOnSubmit(animal);
-            //??
+            db.SubmitChanges();
         }
 
         internal static Animal GetAnimalByID(int id)
         {
-            throw new NotImplementedException();
+            // READ
+            Animal animal = db.Animals.Where(a => a.AnimalId == id).FirstOrDefault();
+            if (animal == null)
+            {
+                throw new Exception("No animal found.");
+            }
+            return(animal);
         }
 
         internal static void UpdateAnimal(int animalId, Dictionary<int, string> updates)
-        {            
-            throw new NotImplementedException();
+        {
+            // UPDATE
+            string input = "";
+
+            //if (dictionary.TryGetValue("1"))
+            //{
+            //    updates.TryGetValue[animalId];
+            //}
+            //updates.TryGetValue(1,out input)
+            //{
+            //    Category animalFromCategory = db.Categories.Where(c => c.Name == categories.Name);
+            //}
         }
 
         internal static void RemoveAnimal(Animal animal)
         {
+            // REMOVE
             db.Animals.DeleteOnSubmit(animal);
             //??
         }
