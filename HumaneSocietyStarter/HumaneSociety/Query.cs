@@ -281,7 +281,7 @@ namespace HumaneSociety
         {
             // REMOVE
             db.Animals.DeleteOnSubmit(animal);
-            //??
+            db.SubmitChanges();
         }
         
         // TODO: Animal Multi-Trait Search
