@@ -166,30 +166,27 @@ namespace HumaneSociety
         // TODO: Allow any of the CRUD operations to occur here
         internal static void RunEmployeeQueries(Employee employee, string crudOperation)
         {
-            //calling all employee methods
+            switch()
+            {
+                case "create":
+                    db.Employees.InsertOnSubmit(employee);
+                    break;
+                case "read":
+                    //logic
+                    break;
+                case "update":
+                    //logic
+                    break;
+                case "delete":
+                    db.Employees.DeleteOnSubmit(employee);
+                    return;
+
+
+
+            }
         }
 
-        //create CRUD operation methods
-        internal static void AddEmployee(Employee employee)
-        {
-            
-        }
-
-        internal static void GetEmployeeById(int id)
-        {
-            //logic
-        }
-
-        internal static void UpdateEmployee()
-        {
-            //logic
-        }
-
-        internal static void RemoveEmployee()
-        {
-            //logic
-        }
-
+       
 
         // TODO: Animal CRUD Operations
         internal static void AddAnimal(Animal animal)
