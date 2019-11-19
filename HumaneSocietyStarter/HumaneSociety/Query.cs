@@ -285,9 +285,46 @@ namespace HumaneSociety
         }
         
         // TODO: Animal Multi-Trait Search
-        internal static IQueryable<Animal> SearchForAnimalsByMultipleTraits(Dictionary<int, string> updates) // parameter(s)?
+        internal static IQueryable<Animal> SearchForAnimalsByMultipleTraits(int animalId, Dictionary<int, string> updates) // parameter(s)?
         {
-            throw new NotImplementedException();
+
+
+            List<Animal> animals = db.Animals.ToList();
+
+            foreach(KeyValuePair<int, string> pair in updates)
+            {
+                switch (pair.Key)
+                {
+                    case 1:
+                        //need to fix this shit
+                        animals = animals.Where(a => a.CategoryId == db.Categories.Where(c => c.Name == pair.Value).Select(c => c.CategoryId)).ToList();
+                        break;
+                    case 2:
+                        animals = animals.Where(a => a.Name == pair.Value).ToList();
+                        break;
+                    case 3:
+                        animals = animals.Where(a => a.Age == Convert.ToInt32(pair.Value)).ToList();
+                        break;
+                    case 4:
+                        animals = animals.Where(a => a.Demeanor == pair.Value).ToList();
+                        break;
+                    case 5:
+                        if (pair.Value == "true")
+                        {
+                            animals = animals.Where(a => a.KidFriendly == Convert.ToBoolean(true)).ToList();
+                        }
+                        break;
+                    case 6:
+                        if (pair.Value == "true")
+                        {
+                            animals = animals.Where(a => a.PetFriendly == Convert.ToBoolean(true)).ToList();
+                        }
+                        break;
+                    case 7:
+                        animals = animals.Where(a => a.Weight == Convert.ToInt32(pair.Value)).ToList();
+                        break;
+                }
+            }
         }
          
         // TODO: Misc Animal Things
