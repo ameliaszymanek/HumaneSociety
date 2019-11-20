@@ -370,14 +370,23 @@ namespace HumaneSociety
 
         internal static void UpdateAdoption(bool isAdopted, Adoption adoption)
         {
-
+            if(isAdopted == true)
+            {
+                adoption.ApprovalStatus = "Approved";
+            }
+            else
+            {
+                adoption.ApprovalStatus = "Denied";
+            }
+            
             db.Adoptions.InsertOnSubmit(adoption);
             db.SubmitChanges();
         }
 
-        internal static void RemoveAdoption(int animalId, int clientId)
+        internal static void RemoveAdoption(Adoption adoption)
         {
-            //
+            db.Adoptions.DeleteOnSubmit(adoption);
+            db.SubmitChanges();
         }
 
         // TODO: Shots Stuff
