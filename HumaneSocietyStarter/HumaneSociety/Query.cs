@@ -289,7 +289,7 @@ namespace HumaneSociety
         {
 
 
-            List<Animal> animals = db.Animals.ToList();
+            IQueryable<Animal> animals = db.Animals;
 
             foreach(KeyValuePair<int, string> pair in updates)
             {
@@ -297,34 +297,38 @@ namespace HumaneSociety
                 {
                     case 1:
                         //need to fix this shit
-                        animals = animals.Where(a => a.CategoryId == db.Categories.Where(c => c.Name == pair.Value).Select(c => c.CategoryId)).ToList();
+                        animals = animals.Where(a => a.CategoryId == GetCategoryId(pair.Value));
                         break;
                     case 2:
-                        animals = animals.Where(a => a.Name == pair.Value).ToList();
+                        animals = animals.Where(a => a.Name == pair.Value);
                         break;
                     case 3:
-                        animals = animals.Where(a => a.Age == Convert.ToInt32(pair.Value)).ToList();
+                        animals = animals.Where(a => a.Age == Convert.ToInt32(pair.Value));
                         break;
                     case 4:
-                        animals = animals.Where(a => a.Demeanor == pair.Value).ToList();
+                        animals = animals.Where(a => a.Demeanor == pair.Value);
                         break;
                     case 5:
                         if (pair.Value == "true")
                         {
-                            animals = animals.Where(a => a.KidFriendly == Convert.ToBoolean(true)).ToList();
+                            animals = animals.Where(a => a.KidFriendly == Convert.ToBoolean(true));
                         }
                         break;
                     case 6:
                         if (pair.Value == "true")
                         {
-                            animals = animals.Where(a => a.PetFriendly == Convert.ToBoolean(true)).ToList();
+                            animals = animals.Where(a => a.PetFriendly == Convert.ToBoolean(true));
                         }
                         break;
                     case 7:
-                        animals = animals.Where(a => a.Weight == Convert.ToInt32(pair.Value)).ToList();
+                        animals = animals.Where(a => a.Weight == Convert.ToInt32(pair.Value));
+                        break;
+                    case 8:
+                        animals = animals.Where(a => a.AnimalId == Convert.ToInt32(pair.Value));
                         break;
                 }
             }
+            return animals;
         }
          
         // TODO: Misc Animal Things
