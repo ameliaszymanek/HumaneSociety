@@ -354,7 +354,7 @@ namespace HumaneSociety
             Adoption adoption = new Adoption();
             adoption.AnimalId = animal.AnimalId;
             adoption.ClientId = client.ClientId;
-            adoption.ApprovalStatus = "Inprocess";
+            adoption.ApprovalStatus = "Processing";
             adoption.AdoptionFee = 50;
             adoption.PaymentCollected = false;
 
@@ -365,13 +365,14 @@ namespace HumaneSociety
 
         internal static IQueryable<Adoption> GetPendingAdoptions()
         {
-            //
-            return (null);
+            return db.Adoptions.Where(a => a.ApprovalStatus == "Processing");
         }
 
         internal static void UpdateAdoption(bool isAdopted, Adoption adoption)
         {
-            //
+
+            db.Adoptions.InsertOnSubmit(adoption);
+            db.SubmitChanges();
         }
 
         internal static void RemoveAdoption(int animalId, int clientId)

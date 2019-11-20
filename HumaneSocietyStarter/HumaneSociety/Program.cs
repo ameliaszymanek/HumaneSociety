@@ -10,12 +10,14 @@ namespace HumaneSociety
     {
         static void Main(string[] args)
         {
-            Animal newAnimal = new Animal();
+            //Animal newAnimal = new Animal();
 
-            newAnimal.Name = "kjbedsf";
+            //newAnimal.Name = "kjbedsf";
 
 
-            Query.AddAnimal(newAnimal);
+            //Query.AddAnimal(newAnimal);
+            //Query.Adopt(animal, client);
+            Query.GetPendingAdoptions();
 
 
             // PointOfEntry.Run();
