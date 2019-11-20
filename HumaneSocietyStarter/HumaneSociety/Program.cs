@@ -16,8 +16,7 @@ namespace HumaneSociety
 
 
             //Query.AddAnimal(newAnimal);
-            //Query.Adopt(animal, client);
-            Query.GetPendingAdoptions();
+            var test = Query.GetRoom(2);
 
 
             // PointOfEntry.Run();
