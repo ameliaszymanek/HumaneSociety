@@ -285,10 +285,8 @@ namespace HumaneSociety
         }
         
         // TODO: Animal Multi-Trait Search
-        internal static IQueryable<Animal> SearchForAnimalsByMultipleTraits(int animalId, Dictionary<int, string> updates) // parameter(s)?
+        internal static IQueryable<Animal> SearchForAnimalsByMultipleTraits(Dictionary<int, string> updates) // parameter(s)?
         {
-
-
             IQueryable<Animal> animals = db.Animals;
 
             foreach(KeyValuePair<int, string> pair in updates)
@@ -296,7 +294,6 @@ namespace HumaneSociety
                 switch (pair.Key)
                 {
                     case 1:
-                        //need to fix this shit
                         animals = animals.Where(a => a.CategoryId == GetCategoryId(pair.Value));
                         break;
                     case 2:
@@ -340,33 +337,46 @@ namespace HumaneSociety
         
         internal static Room GetRoom(int animalId)
         {
-            throw new NotImplementedException();
+            return db.Rooms.Where(r => r.AnimalId == animalId).Single();
+
         }
-        
+
         internal static int GetDietPlanId(string dietPlanName)
         {
-            throw new NotImplementedException();
+            DietPlan dietPlan = db.DietPlans.Where(d => d.Name == dietPlanName).Single();
+            return dietPlan.DietPlanId;
         }
 
         // TODO: Adoption CRUD Operations
         internal static void Adopt(Animal animal, Client client)
         {
-            throw new NotImplementedException();
+            // add a new record to the Adoptions table
+            Adoption adoption = new Adoption();
+            adoption.AnimalId = animal.AnimalId;
+            adoption.ClientId = client.ClientId;
+            adoption.ApprovalStatus = "Inprocess";
+            adoption.AdoptionFee = 50;
+            adoption.PaymentCollected = false;
+
+            db.Adoptions.InsertOnSubmit(adoption);
+            db.SubmitChanges();
+
         }
 
         internal static IQueryable<Adoption> GetPendingAdoptions()
         {
-            throw new NotImplementedException();
+            //
+            return (null);
         }
 
         internal static void UpdateAdoption(bool isAdopted, Adoption adoption)
         {
-            throw new NotImplementedException();
+            //
         }
 
         internal static void RemoveAdoption(int animalId, int clientId)
         {
-            throw new NotImplementedException();
+            //
         }
 
         // TODO: Shots Stuff
